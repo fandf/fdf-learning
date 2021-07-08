@@ -1,0 +1,9 @@
+## FastDfs
+docker run --name fastdfs --privileged=true --net=host  -e IP=192.168.2.127 -e WEB_PORT=8080  -v ${HOME}/fastdfs:/var/local/fdfs -d registry.cn-beijing.aliyuncs.com/itstyle/fastdfs:1.0
+
+–privileged=true：使该容器拥有真正的root权限
+–net=host：容器就和宿主机共用网络，不需要做宿主机和容器的端口映射
+-e：-e和–env设置的环境变量和服务器执行export含义相同，后面的ip为docker网卡ip,WEB_PORT为文件上传的端口
+-v：挂载容器的/var/local/fdfs目录到本地的/fdfs
+
+
