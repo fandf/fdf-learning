@@ -1,5 +1,7 @@
 package com.fandf.mall.search.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import com.fandf.mall.search.mapper.SkuSearchMapper;
 import com.fandf.mall.search.model.SkuEs;
@@ -71,7 +73,11 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         //分组数据解析
         parseGroup(page.getAggregations(),resultMap);
         //动态属性解析
-        attrParse(resultMap);
+        try {
+            attrParse(resultMap);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         List<SkuEs> list = page.getContent();
         resultMap.put("list",list);
         resultMap.put("totalElements",page.getTotalElements());
@@ -83,8 +89,11 @@ public class SkuSearchServiceImpl implements SkuSearchService {
      */
     public void attrParse(Map<String,Object> searchMap){
         //先获取attrmaps
+        if(CollUtil.isEmpty(searchMap)){
+            return;
+        }
         Object attrmaps = searchMap.get("attrmaps");
-        if(attrmaps!=null){
+        if(ObjectUtil.isNotNull(attrmaps)){
             //集合数据
             List<String> groupList= (List<String>) attrmaps;
 

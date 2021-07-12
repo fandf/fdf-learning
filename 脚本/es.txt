@@ -1,0 +1,4 @@
+docker pull elasticsearch:7.13.2
+
+##下载ik分词器
+https://github.com/medcl/elasticsearch-analysis-ik/releases

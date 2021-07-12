@@ -14,7 +14,7 @@ spring:
   #Elasticsearch服务配置 6.8.12
   elasticsearch:
     rest:
-      uris: http://139.196.45.28:9200
+      uris: http://localhost:9200
 #日志配置
 logging:
   pattern:

@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @date 2021/7/12 上午10:44
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-@EnableFeignClients(basePackages = {"com.fandf.mall.goods.feign"})
+@EnableFeignClients(basePackages = {"com.fandf.mall.goods.feign", "com.fandf.mall.search.feign"})
 public class CanalApplication {
 
     public static void main(String[] args) {
