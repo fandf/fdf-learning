@@ -1,0 +1,6 @@
+安装lua 5.3.5
+curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
+tar xf lua-5.3.5.tar.gz
+yum -y install readline-devel ncurses-devel
+cd lua-5.3.5
+make linux test
