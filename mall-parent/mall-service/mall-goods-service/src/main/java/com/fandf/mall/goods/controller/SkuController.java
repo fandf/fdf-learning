@@ -4,6 +4,7 @@ import com.fandf.mall.goods.model.Product;
 import com.fandf.mall.goods.model.Sku;
 import com.fandf.mall.goods.service.SkuService;
 import com.fandf.mall.goods.service.SpuService;
+import com.fandf.mall.model.Cart;
 import com.fandf.mall.util.RespResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,6 +48,26 @@ public class SkuController {
     public RespResult updateTypeItems(@RequestParam(value = "id")Integer id){
         //修改
         skuService.updateTypeSkuItems(id);
+        return RespResult.ok();
+    }
+
+    /****
+     * 根据ID获取Sku
+     */
+    @GetMapping(value = "/{id}")
+    public RespResult<Sku> one(@PathVariable(value = "id") String id){
+        Sku sku = skuService.getById(id);
+        return RespResult.ok(sku);
+    }
+
+    /***
+     * 库存递减
+     * @param carts
+     * @return
+     */
+    @PostMapping(value = "/dcount")
+    public RespResult decount(@RequestBody List<Cart> carts){
+        skuService.decount(carts);
         return RespResult.ok();
     }
 

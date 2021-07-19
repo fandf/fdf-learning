@@ -11,5 +11,12 @@
 
     <artifactId>mall-goods-api</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.fandf</groupId>
+            <artifactId>mall-cart-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

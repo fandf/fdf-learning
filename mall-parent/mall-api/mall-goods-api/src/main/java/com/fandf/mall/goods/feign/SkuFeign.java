@@ -1,12 +1,10 @@
 package com.fandf.mall.goods.feign;
 
 import com.fandf.mall.goods.model.Sku;
+import com.fandf.mall.model.Cart;
 import com.fandf.mall.util.RespResult;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +33,19 @@ public interface SkuFeign {
      */
     @PutMapping(value = "/sku/aditems/type")
     RespResult updateTypeItems(@RequestParam(value = "id")Integer id);
+
+    /****
+     * 根据ID获取Sku
+     */
+    @GetMapping(value = "/sku/{id}")
+    public RespResult<Sku> one(@PathVariable(value = "id") String id);
+
+    /***
+     * 库存递减
+     * @param carts
+     * @return
+     */
+    @PostMapping(value = "/sku/dcount")
+    RespResult decount(List<Cart> carts);
 
 }

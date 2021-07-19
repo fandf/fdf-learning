@@ -29,4 +29,12 @@ public class CategoryController {
         return RespResult.ok(categoryService.findByParentId(id));
     }
 
+    /****
+     * 根据分类查询分类信息
+     */
+    @GetMapping(value = "/{id}")
+    public RespResult<Category> one(@PathVariable(value = "id")Integer id){
+        Category category = categoryService.getById(id);
+        return RespResult.ok(category);
+    }
 }

@@ -11,6 +11,7 @@ import com.fandf.mall.goods.model.Sku;
 import com.fandf.mall.goods.model.SkuAttribute;
 import com.fandf.mall.goods.service.SkuAttributeService;
 import com.fandf.mall.goods.service.SkuService;
+import com.fandf.mall.model.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -25,6 +26,8 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
 
     @Autowired
     private AdItemsMapper adItemsMapper;
+    @Autowired
+    private SkuMapper skuMapper;
 
     @Override
 //    @Cacheable(cacheNames = "ad-items-skus", key = "#id")
@@ -68,5 +71,19 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
         return skuids==null || skuids.size()<=0? null : this.listByIds(skuids);
     }
 
+    /***
+     * 库存递减
+     * @param carts
+     */
+    @Override
+    public void decount(List<Cart> carts) {
+        for (Cart cart : carts) {
+            //语句级控制，防止超卖
+            int count = skuMapper.decount(cart.getSkuId(),cart.getNum());
+            if(count<=0){
+                throw new RuntimeException("库存不足！");
+            }
+        }
+    }
 
 }

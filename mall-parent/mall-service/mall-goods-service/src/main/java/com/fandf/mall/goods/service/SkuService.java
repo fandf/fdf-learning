@@ -3,6 +3,7 @@ package com.fandf.mall.goods.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.fandf.mall.goods.model.Sku;
 import com.fandf.mall.goods.model.SkuAttribute;
+import com.fandf.mall.model.Cart;
 
 import java.util.List;
 
@@ -19,4 +20,10 @@ public interface SkuService extends IService<Sku> {
     void delTypeSkuItems(Integer id);
 
     List<Sku> updateTypeSkuItems(Integer id);
+
+    /***
+     * 库存递减
+     * @param carts
+     */
+    void decount(List<Cart> carts);
 }

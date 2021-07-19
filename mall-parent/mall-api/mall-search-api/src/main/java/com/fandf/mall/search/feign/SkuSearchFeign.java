@@ -3,10 +3,9 @@ package com.fandf.mall.search.feign;
 import com.fandf.mall.search.model.SkuEs;
 import com.fandf.mall.util.RespResult;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /*****
  * @Author:
@@ -27,4 +26,11 @@ public interface SkuSearchFeign {
      */
     @DeleteMapping(value = "/search/del/{id}")
     RespResult del(@PathVariable(value = "id")String id);
+
+
+    /****
+     * 商品搜索
+     */
+    @GetMapping
+    RespResult<Map<String,Object>> search(@RequestParam Map<String,Object> searchMap);
 }

@@ -14,4 +14,7 @@ public interface SpuService extends IService<Spu> {
      * 产品保存
      */
     void saveProduct(Product product);
+
+    Product findBySupId(String id);
+
 }
