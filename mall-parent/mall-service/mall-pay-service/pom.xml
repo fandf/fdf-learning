@@ -9,32 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mall-order-service</artifactId>
+    <artifactId>mall-pay-service</artifactId>
 
     <dependencies>
+        <!--支付Api-->
         <dependency>
             <groupId>com.fandf</groupId>
-            <artifactId>mall-order-api</artifactId>
+            <artifactId>mall-pay-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <!--goodsapi-->
-        <dependency>
-            <groupId>com.fandf</groupId>
-            <artifactId>mall-goods-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fandf</groupId>
-            <artifactId>mall-cart-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
-            <version>2.1.0.RELEASE</version>
         </dependency>
 
         <!--rocketmq-->
