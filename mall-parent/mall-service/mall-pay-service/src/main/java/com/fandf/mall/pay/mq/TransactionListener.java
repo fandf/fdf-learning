@@ -10,30 +10,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
+
+/*****
+ * @Author:
+ * @Description:
+ ****/
 @Component
 @RocketMQTransactionListener(txProducerGroup = "rocket")
-public class TransactionListenerImpl implements RocketMQLocalTransactionListener {
+public class TransactionListener implements RocketMQLocalTransactionListener{
 
     @Autowired
     private PayLogService payLogService;
 
-    /***
-     * 发送prepare消息成功后回调该方法用于执行本地事务
-     * @param message:回传的消息，利用transactionId即可获取到该消息的唯一Id
-     * @param o:调用send方法时传递的参数，当send时候若有额外的参数可以传递到send方法中，这里能获取到
+
+    /****
+     * 当向RocketMQ的Broker发送Half消息成功之后，调用该方法
+     * @param msg:发送的消息
+     * @param arg:额外参数
      * @return
      */
     @Override
-    public RocketMQLocalTransactionState executeLocalTransaction(Message message, Object o) {
+    public RocketMQLocalTransactionState executeLocalTransaction(Message msg, Object arg) {
         try {
-            //================本地事务操作开始=====================================
-            //将o转成PayLog
-            String result = new String((byte[]) message.getPayload(),"UTF-8");
+            //========================本地事务控制===================
+            //消息
+            String result = new String((byte[]) msg.getPayload(),"UTF-8");
             PayLog payLog = JSON.parseObject(result,PayLog.class);
-            payLogService.log(payLog);
-            //================本地事务操作结束=====================================
+            payLogService.add(payLog);
+            //========================本地事务控制===================
         } catch (Exception e) {
-            //异常,消息回滚
             e.printStackTrace();
             return RocketMQLocalTransactionState.ROLLBACK;
         }
@@ -41,12 +46,12 @@ public class TransactionListenerImpl implements RocketMQLocalTransactionListener
     }
 
     /***
-     * 消息回查
-     * @param message
+     * 超时回查
+     * @param msg
      * @return
      */
     @Override
-    public RocketMQLocalTransactionState checkLocalTransaction(Message message) {
+    public RocketMQLocalTransactionState checkLocalTransaction(Message msg) {
         return RocketMQLocalTransactionState.COMMIT;
     }
 }

@@ -6,8 +6,11 @@ import com.fandf.mall.pay.model.PayLog;
 import com.fandf.mall.pay.service.PayLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+/*****
+ * @Author:
+ * @Description:
+ ****/
 @Service
 public class PayLogServiceImpl extends ServiceImpl<PayLogMapper, PayLog> implements PayLogService {
 
@@ -15,13 +18,14 @@ public class PayLogServiceImpl extends ServiceImpl<PayLogMapper, PayLog> impleme
     private PayLogMapper payLogMapper;
 
     /***
-     * 记录日志
+     * log
      * @param payLog
      */
-    @Transactional(rollbackFor = Exception.class)
     @Override
-    public void log(PayLog payLog) {
-        //本地操作
-        int count = payLogMapper.insert(payLog);
+    public void add(PayLog payLog) {
+        //删除
+        payLogMapper.deleteById(payLog.getId());
+        //增加
+        payLogMapper.insert(payLog);
     }
 }

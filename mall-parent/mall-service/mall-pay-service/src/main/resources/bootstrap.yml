@@ -48,3 +48,21 @@ rocketmq:
     retry-times-when-send-async-failed: 0
     retry-next-server: true
     retry-times-when-send-failed: 2
+payconfig:
+  weixin:
+    #应用ID
+    appId: wxb1991bfd40e9797b
+    #商户ID号
+    mchID: 157请自行申请561
+    #秘钥
+    key: be3edc925c9ffe0bd1ed02c94d88be93
+    #默认回调地址
+    notifyUrl: http://41369810sm.wicp.vip/wx/result
+    #证书存储路径
+    certPath: /Users/dongfengfan/IdeaProjects/fdf-learning/mall-parent/mall-service/mall-pay-service/src/main/resources/apiclient_cert.p12
+  #支付安全校验(验签)
+  aes:
+    #AES加密秘钥
+    skey: ab2cc473d3334c39
+    #验签盐
+    salt: XPYQZb1kMES8HNaJWW8+TDu/4JdBK4owsU9eXCXZDOI=
